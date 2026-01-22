@@ -14,9 +14,11 @@ const Modal = ({ children, onClose }: ModalProps) => {
         onClose();
       }
     }
+    document.body.style.overflow = "hidden";
     document.addEventListener("keydown", closeModal);
     return () => {
       document.removeEventListener("keydown", closeModal);
+      document.body.style.overflow = "";
     };
   }, []);
 

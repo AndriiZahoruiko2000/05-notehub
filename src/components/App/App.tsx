@@ -47,6 +47,7 @@ const App = () => {
   const error = noteQuery.isError;
 
   const handleSubmit = (values: NewNote) => {
+    setPage(1);
     noteMutation.mutate(values);
     setIsOpenModal(false);
   };

@@ -43,7 +43,7 @@ export async function getNoteById(id: string) {
 }
 
 export async function deleteNoteById(id: string) {
-  const res = await serverAPI.delete(`/notes/${id}`);
+  const res = await serverAPI.delete<Note>(`/notes/${id}`);
   return res.data;
 }
 

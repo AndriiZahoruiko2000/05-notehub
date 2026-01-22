@@ -1,21 +1,21 @@
 import css from "./App.module.css";
-import Modal from "./Modal/Modal";
-import NoteList from "./NoteList/NoteList";
-import Pagination from "./Pagination/Pagination";
-import SearchBox from "./SearchBox/SearchBox";
-import NoteForm from "./NoteForm/NoteForm";
+import Modal from "../Modal/Modal";
+import NoteList from "../NoteList/NoteList";
+import Pagination from "../Pagination/Pagination";
+import SearchBox from "../SearchBox/SearchBox";
+import NoteForm from "../NoteForm/NoteForm";
 import {
   keepPreviousData,
   useMutation,
   useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
-import { createNote, getNotes } from "../services/noteService";
+import { createNote, getNotes } from "../../services/noteService";
 import { useState } from "react";
-import type { NewNote } from "../types/note";
+import type { NewNote } from "../../types/note";
 import { useDebounce } from "use-debounce";
-import Loader from "./Loader/Loader";
-import ErrorMessage from "./ErrorMessage/ErrorMessage";
+import Loader from "../Loader/Loader";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
 
 const App = () => {
   const queryClient = useQueryClient();

@@ -45,7 +45,8 @@ const NoteForm = ({ onSubmit }: NoteFormProps) => {
 
         <div className={css.formGroup}>
           <label htmlFor="content">Content</label>
-          <textarea
+          <Field
+            as="textarea"
             id="content"
             name="content"
             rows={8}

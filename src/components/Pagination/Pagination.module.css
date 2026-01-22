@@ -1,7 +1,6 @@
 .pagination {
   display: flex;
   justify-content: center;
-  align-items: center;
   gap: 4px;
   list-style: none;
   padding: 0;
@@ -14,7 +13,6 @@
   cursor: pointer;
   min-width: 36px;
   height: 36px;
-  background-color: #fff;
   transition:
     background-color 0.2s ease,
     color 0.2s ease;

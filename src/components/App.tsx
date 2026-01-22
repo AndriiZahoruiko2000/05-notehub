@@ -14,6 +14,8 @@ import { createNote, getNotes } from "../services/noteService";
 import { useState } from "react";
 import type { NewNote } from "../types/note";
 import { useDebounce } from "use-debounce";
+import Loader from "./Loader/Loader";
+import ErrorMessage from "./ErrorMessage/ErrorMessage";
 
 const App = () => {
   const queryClient = useQueryClient();
@@ -41,6 +43,8 @@ const App = () => {
 
   const notesList = noteQuery.data?.notes || [];
   const totalPages = noteQuery.data?.totalPages ?? 0;
+  const loading = noteQuery.isLoading;
+  const error = noteQuery.isError;
 
   const handleSubmit = (values: NewNote) => {
     noteMutation.mutate(values);
@@ -65,6 +69,8 @@ const App = () => {
       <main>
         <NoteList notesList={notesList} />
       </main>
+      {loading && <Loader />}
+      {error && <ErrorMessage />}
       {isOpenModal && (
         <Modal onClose={() => setIsOpenModal(false)}>
           <NoteForm onSubmit={handleSubmit} />

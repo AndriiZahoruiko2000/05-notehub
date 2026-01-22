@@ -67,9 +67,7 @@ const App = () => {
           Create note +
         </button>
       </header>
-      <main>
-        <NoteList notesList={notesList} />
-      </main>
+      <main>{notesList.length > 0 && <NoteList notesList={notesList} />}</main>
       {loading && <Loader />}
       {error && <ErrorMessage />}
       {isOpenModal && (

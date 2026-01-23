@@ -4,22 +4,15 @@ import NoteList from "../NoteList/NoteList";
 import Pagination from "../Pagination/Pagination";
 import SearchBox from "../SearchBox/SearchBox";
 import NoteForm from "../NoteForm/NoteForm";
-import {
-  keepPreviousData,
-  useMutation,
-  useQuery,
-  useQueryClient,
-} from "@tanstack/react-query";
-import { createNote, getNotes } from "../../services/noteService";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
+import { getNotes } from "../../services/noteService";
 import { useState } from "react";
-import type { NewNote } from "../../types/note";
+
 import { useDebounce } from "use-debounce";
 import Loader from "../Loader/Loader";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 
 const App = () => {
-  const queryClient = useQueryClient();
-
   const [page, setPage] = useState(1);
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [search, setSearch] = useState("");
@@ -32,28 +25,18 @@ const App = () => {
     placeholderData: keepPreviousData,
   });
 
-  const noteMutation = useMutation({
-    mutationFn: (body: NewNote) => createNote(body),
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["getNotes"],
-      });
-    },
-  });
-
   const notesList = noteQuery.data?.notes || [];
   const totalPages = noteQuery.data?.totalPages ?? 0;
   const loading = noteQuery.isLoading;
   const error = noteQuery.isError;
 
-  const handleSubmit = (values: NewNote) => {
-    setPage(1);
-    noteMutation.mutate(values);
-    setIsOpenModal(false);
-  };
-
   const handleModalClick = () => {
     setIsOpenModal(true);
+  };
+
+  const handleSubmit = () => {
+    setPage(1);
+    setIsOpenModal(false);
   };
 
   return (

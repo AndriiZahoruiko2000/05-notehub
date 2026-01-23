@@ -7,6 +7,7 @@ import { createNote } from "../../services/noteService";
 
 interface NoteFormProps {
   onSubmit: () => void;
+  onClose: () => void;
 }
 
 interface FormValues {
@@ -27,7 +28,7 @@ const noteScheme = Yup.object().shape({
   tag: Yup.string().required(),
 });
 
-const NoteForm = ({ onSubmit }: NoteFormProps) => {
+const NoteForm = ({ onSubmit, onClose }: NoteFormProps) => {
   const queryClient = useQueryClient();
 
   const noteMutation = useMutation({
@@ -82,7 +83,11 @@ const NoteForm = ({ onSubmit }: NoteFormProps) => {
         </div>
 
         <div className={css.actions}>
-          <button type="button" className={css.cancelButton}>
+          <button
+            onClick={() => onClose()}
+            type="button"
+            className={css.cancelButton}
+          >
             Cancel
           </button>
           <button type="submit" className={css.submitButton} disabled={false}>

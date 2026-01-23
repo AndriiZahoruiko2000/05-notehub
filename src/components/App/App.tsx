@@ -39,6 +39,10 @@ const App = () => {
     setIsOpenModal(false);
   };
 
+  const closeModal = () => {
+    setIsOpenModal(false);
+  };
+
   return (
     <div className={css.app}>
       <header className={css.toolbar}>
@@ -54,8 +58,8 @@ const App = () => {
       {loading && <Loader />}
       {error && <ErrorMessage />}
       {isOpenModal && (
-        <Modal onClose={() => setIsOpenModal(false)}>
-          <NoteForm onSubmit={handleSubmit} />
+        <Modal onClose={closeModal}>
+          <NoteForm onSubmit={handleSubmit} onClose={closeModal} />
         </Modal>
       )}
     </div>
